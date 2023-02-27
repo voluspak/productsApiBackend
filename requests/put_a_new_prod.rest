@@ -1,0 +1,8 @@
+PUT http://localhost:3001/api/products/63fce4f8fe2edafbd42ceece
+Content-Type: application/json
+
+{
+  "name": "Tortarol",
+  "price": 28,
+  "unid": "1 unid"
+}

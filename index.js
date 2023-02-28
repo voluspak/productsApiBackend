@@ -74,7 +74,7 @@ app.post('/api/products', (request, response) => {
     return response.status(400).json({
       error: 'product is empty'
     })
-  } else if (!product.name) {
+  } else if (!product.name || product.name === '') {
     return response.status(400).json({
       error: 'product.name is missing'
     })
@@ -107,4 +107,6 @@ app.use(notFound)
 app.use(handleErrors)
 const PORT = process.env.PORT || 3001
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+module.exports = { app, server }

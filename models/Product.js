@@ -7,7 +7,11 @@ const productSchema = new Schema({
   price: Number,
   unid: String,
   cant: Number,
-  stock: Number
+  stock: Number,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 productSchema.set('toJSON', {

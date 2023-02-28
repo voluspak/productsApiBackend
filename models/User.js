@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
 const userSchema = new Schema({
-  user: String,
+  username: String,
   passwordHash: String,
   products: [{
     type: Schema.Types.ObjectId,

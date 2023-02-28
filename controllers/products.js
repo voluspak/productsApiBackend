@@ -1,5 +1,6 @@
 const productsRouter = require('express').Router()
 const Product = require('../models/Product')
+const User = require('../models/User')
 
 productsRouter.get('/', (request, response) => {
   Product.find({})
@@ -37,30 +38,36 @@ productsRouter.put('/:id', (request, response, next) => {
     .catch(next)
 })
 
-productsRouter.post('/', (request, response) => {
-  const product = request.body
+productsRouter.post('/', async (request, response) => {
+  const { name, img, price, unid, cant, stock, userId } = request.body
 
-  if (!product) {
+  const user = await User.findById(userId)
+
+  if (!name) {
     return response.status(400).json({
-      error: 'product is empty'
-    })
-  } else if (!product.name || product.name === '') {
-    return response.status(400).json({
-      error: 'product.name is missing'
+      error: 'product name is empty'
     })
   }
 
   const newProduct = new Product({
-    img: product.img,
-    name: product.name,
-    price: product.price,
-    unid: product.unid,
-    cant: product.cant || 1,
-    stock: product.stock || 20
+    img,
+    name,
+    price,
+    unid,
+    cant: cant || 1,
+    stock: stock || 20,
+    user: user._id
   })
-  newProduct.save()
-    .then(savedProd => response.status(201).json(savedProd))
-    .catch(() => response.status(400).end())
+  try {
+    const savedProd = await newProduct.save()
+    user.products = user.products.concat(savedProd._id)
+
+    await user.save()
+
+    response.json(savedProd)
+  } catch {
+    response.status(400).end()
+  }
 })
 
 productsRouter.delete('/:id', (request, response, next) => {

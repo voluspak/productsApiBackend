@@ -1,4 +1,5 @@
 require('./mongoose')
+require('dotenv').config({ path: './.env' })
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -6,6 +7,7 @@ const Sentry = require('@sentry/node')
 const Tracing = require('@sentry/tracing')
 const logger = require('./loggerMiddleware')
 const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const notFound = require('./middlewares/notFound')
 const productsRouter = require('./controllers/products')
 const handleErrors = require('./middlewares/handleErrors')
@@ -37,11 +39,12 @@ app.use('/api/products', productsRouter)
 app.use(Sentry.Handlers.errorHandler())
 
 app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
 app.use(notFound)
 
 app.use(handleErrors)
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 
 const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 

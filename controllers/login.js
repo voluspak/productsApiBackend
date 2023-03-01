@@ -1,6 +1,8 @@
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const loginRouter = require('express').Router()
 const User = require('../models/User')
+require('dotenv').config({ path: '../.env' })
 
 loginRouter.post('/', async (request, response) => {
   const { username, password } = request.body
@@ -11,13 +13,20 @@ loginRouter.post('/', async (request, response) => {
     ? false
     : await bcrypt.compare(password, user.passwordHash)
 
-  if (!correctPassword) {
+  if (!(user && correctPassword)) {
     response.status(401).json({
       error: 'Invalid user or password'
     })
   }
 
-  response.send({ username: user.username })
+  const userForToken = {
+    id: user._id,
+    username: user.username
+  }
+  const secretPass = process.env.ADMIN_SECRET_PASS
+  const token = jwt.sign(userForToken, secretPass, { expiresIn: 60 * 60 * 24 * 30 })
+
+  response.send({ username: user.username, token })
 })
 
 module.exports = loginRouter

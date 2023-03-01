@@ -1,6 +1,9 @@
 const productsRouter = require('express').Router()
+const userExtractor = require('../middlewares/userExtractor')
 const Product = require('../models/Product')
 const User = require('../models/User')
+
+require('dotenv').config({ path: '../.env' })
 
 productsRouter.get('/', (request, response) => {
   Product.find({})
@@ -20,7 +23,7 @@ productsRouter.get('/:id', (request, response, next) => {
     .catch((err) => next(err))
 })
 
-productsRouter.put('/:id', (request, response, next) => {
+productsRouter.put('/:id', userExtractor, (request, response, next) => {
   const { id } = request.params
   const product = request.body
 
@@ -38,9 +41,9 @@ productsRouter.put('/:id', (request, response, next) => {
     .catch(next)
 })
 
-productsRouter.post('/', async (request, response) => {
-  const { name, img, price, unid, cant, stock, userId } = request.body
-
+productsRouter.post('/', userExtractor, async (request, response) => {
+  const { name, img, price, unid, cant, stock } = request.body
+  const { userId } = request
   const user = await User.findById(userId)
 
   if (!name) {
@@ -70,7 +73,7 @@ productsRouter.post('/', async (request, response) => {
   }
 })
 
-productsRouter.delete('/:id', (request, response, next) => {
+productsRouter.delete('/:id', userExtractor, (request, response, next) => {
   const { id } = request.params
   Product.findByIdAndRemove(id)
     .then(() => response.status(204).end())

@@ -1,12 +1,12 @@
 POST http://localhost:3001/api/products
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZmUyNTRkM2VkZjAzZjI2NmI3YWYwNSIsInVzZXJuYW1lIjoiQWRtaW4yIiwiaWF0IjoxNjc3NjgwNDA1LCJleHAiOjE2ODAyNzI0MDV9.sEJVlwhQRFFdU5VvTCUOOYvias0-iKjtguCvRr33abU
 
 {
     "img":"https://img.freepik.com/foto-gratis/disparo-vertical-deliciosos-rollos-semillas-amapola-glaseado-azucar-canasta_181624-46033.jpg?w=360&t=st=1677513742~exp=1677514342~hmac=843b18bc130333bbbc811b8f12a0f4d969d6214ec00ed517fbb76d24abc9d3fc",
-    "name": "Pan frances",
-    "price": 20,
+    "name": "Pan de Campo",
+    "price": 12,
     "unid": "x1 Barra",
-    "userId": "63fe254d3edf03f266b7af05",
     "stock": 10,
     "cant": 1
 }

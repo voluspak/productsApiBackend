@@ -42,7 +42,7 @@ productsRouter.put('/:id', userExtractor, (request, response, next) => {
 })
 
 productsRouter.post('/', userExtractor, async (request, response) => {
-  const { name, img, price, unid, cant, stock } = request.body
+  const { name, img, price, unid, cant, stock, category } = request.body
   const { userId } = request
   const user = await User.findById(userId)
 
@@ -57,6 +57,7 @@ productsRouter.post('/', userExtractor, async (request, response) => {
     name,
     price,
     unid,
+    category,
     cant: cant || 1,
     stock: stock || 20,
     user: user._id

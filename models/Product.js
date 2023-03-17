@@ -8,6 +8,7 @@ const productSchema = new Schema({
   unid: String,
   category: String,
   cant: Number,
+  display: Boolean,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

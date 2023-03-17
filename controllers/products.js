@@ -31,9 +31,9 @@ productsRouter.put('/:id', userExtractor, (request, response, next) => {
     img: product.img,
     name: product.name,
     price: product.price,
+    category: product.category,
     unid: product.unid,
-    cant: product.cant,
-    stock: product.stock
+    cant: product.cant
   }
 
   Product.findByIdAndUpdate(id, newProdInfo, { new: true })
@@ -42,7 +42,7 @@ productsRouter.put('/:id', userExtractor, (request, response, next) => {
 })
 
 productsRouter.post('/', userExtractor, async (request, response) => {
-  const { name, img, price, unid, cant, stock, category } = request.body
+  const { name, img, price, unid, category } = request.body
   const { userId } = request
   const user = await User.findById(userId)
 
@@ -58,8 +58,8 @@ productsRouter.post('/', userExtractor, async (request, response) => {
     price,
     unid,
     category,
-    cant: cant || 1,
-    stock: stock || 20,
+    cant: 1,
+    display: true,
     user: user._id
   })
   try {

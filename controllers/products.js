@@ -32,6 +32,7 @@ productsRouter.put('/:id', userExtractor, (request, response, next) => {
     name: product.name,
     price: product.price,
     category: product.category,
+    display: product.display || true,
     unid: product.unid,
     cant: product.cant
   }
@@ -72,6 +73,19 @@ productsRouter.post('/', userExtractor, async (request, response) => {
   } catch {
     response.status(400).end()
   }
+})
+
+productsRouter.patch('/:id', userExtractor, (request, response, next) => {
+  const product = request.body
+
+  Product.findOneAndUpdate({ name: product.name }, { display: product.display }, { new: true })
+    .then(res => {
+      response.status(201)
+      response.json(res)
+    })
+    .catch((err) => {
+      next(err)
+    })
 })
 
 productsRouter.delete('/:id', userExtractor, (request, response, next) => {

@@ -1,10 +1,8 @@
-PUT http://localhost:3001/api/products/63fce4f8fe2edafbd42ceece
+PATCH http://localhost:3001/api/products/6414684231f5a00bb5712eee
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZmUyNTRkM2VkZjAzZjI2NmI3YWYwNSIsInVzZXJuYW1lIjoiQWRtaW4yIiwiaWF0IjoxNjc3NjgwNDA1LCJleHAiOjE2ODAyNzI0MDV9.sEJVlwhQRFFdU5VvTCUOOYvias0-iKjtguCvRr33abU
 
-
-{
-  "name": "Tortarol",
-  "price": 28,
-  "unid": "1 unid"
-}
+  {
+    "name": "Pan de Jamón",
+    "display": false
+  }

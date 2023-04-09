@@ -8,3 +8,5 @@ console.log(connectionString === process.env.MONGO_DB_URI_TEST ? 'Conectado a te
 mongoose.connect(connectionString)
   .then(() => console.log('Database connected bro!'))
   .catch(err => console.log('Oopsie!' + err))
+
+console.log(process.env.MONGO_DB_URI)

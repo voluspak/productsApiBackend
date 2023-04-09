@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "start": "cross-env NODE_ENV=production node index.js",
-    "test": "cross-env NODE_ENV=test PORT=1000 jest --verbose --silent tests/user.test.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "test": "NODE_ENV=test PORT=1000 jest --verbose --silent tests/user.test.js",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [],

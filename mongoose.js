@@ -1,12 +1,10 @@
 require('dotenv').config({ path: './.env' })
 const mongoose = require('mongoose')
 
-const connectionString = process.env.NODE_ENV === 'test'
-  ? process.env.MONGO_DB_URI_TEST
-  : process.env.MONGO_DB_URI
-console.log(connectionString === process.env.MONGO_DB_URI_TEST ? 'Conectado a testingDB' : 'conectado a productionDB')
+const connectionString = 'mongodb+srv://itelleria96:IhSPHPjmPfA6Vbig@galipandatabase.z9bzpt8.mongodb.net/galipandb?retryWrites=true&w=majority'
+console.log('conectado a productionDB')
 mongoose.connect(connectionString)
   .then(() => console.log('Database connected bro!'))
   .catch(err => console.log('Oopsie!' + err))
 
-console.log(process.env.MONGO_DB_URI)
+console.log('the string is: ' + process.env.MONGO_DB_URI)
